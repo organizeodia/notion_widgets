@@ -14,10 +14,12 @@
             <circle cx="116" cy="44" r="25" fill="black" />
             <circle cx="396" cy="44" r="25" fill="black" />
         </mask>
-        <linearGradient id="Gradient" x1="0" x2="0" y1="0" y2="1">
-            <stop offset="25%" stop-color="#545454"/>
-            <stop offset="70%" stop-color="#383838"/>
-            <stop offset="100%" stop-color="#343434"/>
+        <linearGradient id="DayGradient" x1="0" x2="0" y1="0" y2="1">
+            <stop offset="0%" stop-color="#535353"/>
+            <stop offset="100%" stop-color="#373737"/>
+        </linearGradient>
+        <linearGradient id="MonthGradient" x1="0" x2="0" y1="0" y2="1">
+            <stop offset="0%" stop-color="#ffffff"/>
         </linearGradient>
     </defs>
 </svg>
@@ -27,14 +29,29 @@ function atualizarCalendario() {
   // Obter a data atual
   const dataAtual = new Date();
 
-  // Obter o dia atual
+  // Mapear nomes dos meses
+  const meses = [
+    'JAN', 'FEV', 'MAR', 'ABR', 'MAI', 'JUN',
+    'JUL', 'AGO', 'SET', 'OUT', 'NOV', 'DEZ'
+  ];
+
+  // Mapear nomes dos dias da semana
+  const diasDaSemana = [
+    'Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'
+  ];
+
+  // Obter informações da data atual
   const diaAtual = dataAtual.getDate();
+  const diaSemanaAtual = diasDaSemana[dataAtual.getDay()];
+  const mesAtual = meses[dataAtual.getMonth()];
 
   // Gerar o código SVG dinamicamente
   const svg = `
     <rect x="0" y="0" width="512" height="200" fill="#2F2F2F" mask="url(#hole)"></rect>
     <rect x="0" y="198" width="512" height="314" fill="#dbdbdb"></rect>
-    <text id="day" x="256" y="328" fill="url(#Gradient)" font-family="Jost, San Francisco, Tahoma, Arial" font-size="256px" style="text-anchor: middle" kerning="auto">${diaAtual}</text>
+    <text id="day" x="256" y="280" fill="url(#DayGradient)" font-family="Jost, San Francisco, Tahoma, Arial" font-size="128px" style="text-anchor: middle" kerning="auto">${diaAtual}</text>
+    <text id="weekday" x="256" y="420" fill="#9f9f9f" font-family="Jost, San Francisco, Tahoma, Arial" font-size="48px" style="text-anchor: middle" kerning="auto">${diaSemanaAtual}</text>
+    <text id="month" x="256" y="470" fill="url(#MonthGradient)" font-family="Jost, San Francisco, Tahoma, Arial" font-size="48px" style="text-anchor: middle" kerning="auto">${mesAtual}</text>
   `;
 
   // Atualizar o SVG no elemento "calendario"
