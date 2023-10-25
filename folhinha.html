@@ -2,6 +2,17 @@
 <html>
 <head>
     <title>Calendário em Português</title>
+    <style>
+        #calendar {
+            width: 450px;
+            height: 250px;
+            overflow: hidden;
+        }
+        svg {
+            transform: scale(0.49);
+            transform-origin: top left;
+        }
+    </style>
 </head>
 <body>
     <div id="calendar">
@@ -24,8 +35,7 @@
             <rect x="0" y="0" width="512" height="200" fill="#2F2F2F" mask="url(#hole)"></rect>
             <rect x="0" y="198" width="512" height="314" fill="#dbdbdb"></rect>
             <g fill="#dcdcdc">
-                <circle cx="326" cy="94" r="4" />
-        <circle cx="356" cy="94" r="4" />
+                <circle cx="356" cy="94" r="4" />
         <circle cx="386" cy="94" r="4" />
         <circle cx="416" cy="94" r="4" />
         <circle cx="446" cy="94" r="4" />
