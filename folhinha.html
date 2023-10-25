@@ -19,6 +19,13 @@
             <stop offset="100%" stop-color="#373737"/>
         </linearGradient>
     </defs>
+
+    <!-- Retângulos para fundo e caixa de texto -->
+    <rect x="0" y="0" width="512" height="200" fill="#2F2F2F" mask="url(#hole)"></rect>
+    <rect x="0" y="198" width="512" height="314" fill="#dbdbdb"></rect>
+  
+    <!-- Texto do calendário -->
+    <text id="text" x="256" y="320" fill="url(#TextGradient)" font-family="Jost, San Francisco, Tahoma, Arial" font-size="128px" style="text-anchor: middle" kerning="auto"></text>
 </svg>
 
 <script>
@@ -31,15 +38,8 @@ function atualizarCalendario() {
   const diaSemanaAtual = dataAtual.toLocaleDateString('pt-BR', { weekday: 'long' });
   const mesAtual = dataAtual.toLocaleDateString('pt-BR', { month: 'short' });
 
-  // Gerar o código SVG dinamicamente
-  const svg = `
-    <rect x="0" y="0" width="512" height="200" fill="#2F2F2F" mask="url(#hole)"></rect>
-    <rect x="0" y="198" width="512" height="314" fill="#dbdbdb"></rect>
-    <text id="text" x="256" y="320" fill="url(#TextGradient)" font-family="Jost, San Francisco, Tahoma, Arial" font-size="128px" style="text-anchor: middle" kerning="auto">${diaAtual} ${diaSemanaAtual} ${mesAtual}</text>
-  `;
-
-  // Atualizar o SVG no elemento "calendario"
-  document.getElementById('calendario').innerHTML = svg;
+  // Atualizar o conteúdo do elemento de texto
+  document.getElementById('text').textContent = `${diaAtual} ${diaSemanaAtual} ${mesAtual}`;
 }
 
 // Chamar a função para gerar o calendário inicialmente
