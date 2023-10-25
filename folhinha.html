@@ -27,56 +27,15 @@ function atualizarCalendario() {
   // Obter a data atual
   const dataAtual = new Date();
 
-  // Mapear nomes dos meses
-  const meses = [
-    'JAN', 'FEV', 'MAR', 'ABR', 'MAI', 'JUN',
-    'JUL', 'AGO', 'SET', 'OUT', 'NOV', 'DEZ'
-  ];
-
-  // Mapear nomes dos dias da semana
-  const diasDaSemana = [
-    'Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'
-  ];
-
-  // Obter informações da data atual
-  const mesAtual = meses[dataAtual.getMonth()];
+  // Obter o dia atual
   const diaAtual = dataAtual.getDate();
-  const diaSemanaAtual = diasDaSemana[dataAtual.getDay()];
 
   // Gerar o código SVG dinamicamente
-  let svg = `
+  const svg = `
     <rect x="0" y="0" width="512" height="200" fill="#2F2F2F" mask="url(#hole)"></rect>
     <rect x="0" y="198" width="512" height="314" fill="#dbdbdb"></rect>
-    <g fill="#dcdcdc">
-      <!-- Círculos do calendário aqui -->
-    </g>
-    <text id="month" x="128" y="170" fill="#dbdbdb" font-family="Jost, San Francisco, Tahoma, Arial" font-size="108px" font-weight="lighter" style="text-anchor: middle" kerning="auto">${mesAtual}</text>
-    <text id="day" x="256" y="428" fill="url(#Gradient)" font-family="Jost, San Francisco, Tahoma, Arial" font-size="256px" style="text-anchor: middle" kerning="auto">${diaAtual}</text>
-    <text id="weekday" x="256" y="486" fill="#9e9e9e" font-family="Jost, San Francisco, Tahoma, Arial" font-size="48px" style="text-anchor: middle" kerning="auto">${diaSemanaAtual}</text>
+    <text id="day" x="256" y="328" fill="url(#Gradient)" font-family="Jost, San Francisco, Tahoma, Arial" font-size="256px" style="text-anchor: middle" kerning="auto">${diaAtual}</text>
   `;
-
-  // Adicionar uma representação básica dos dias do mês em uma tabela
-  svg += '<g font-family="Jost, San Francisco, Tahoma, Arial" font-size="24px" fill="#000" text-anchor="middle">';
-  let x = 36; // Posição X inicial
-  let y = 250; // Posição Y inicial
-  const diasNoMes = new Date(dataAtual.getFullYear(), dataAtual.getMonth() + 1, 0).getDate(); // Número de dias no mês
-  const primeiroDiaDaSemana = new Date(dataAtual.getFullYear(), dataAtual.getMonth(), 1).getDay(); // Dia da semana do primeiro dia do mês
-
-  for (let dia = 1; dia <= diasNoMes; dia++) {
-    if (dia === diaAtual) {
-      svg += `<text x="${x}" y="${y}" fill="url(#Gradient)">${dia}</text>`;
-    } else {
-      svg += `<text x="${x}" y="${y}">${dia}</text>`;
-    }
-
-    x += 64; // Espaçamento horizontal
-    if ((dia + primeiroDiaDaSemana) % 7 === 0) {
-      x = 36;
-      y += 48; // Espaçamento vertical
-    }
-  }
-
-  svg += '</g>';
 
   // Atualizar o SVG no elemento "calendario"
   document.getElementById('calendario').innerHTML = svg;
